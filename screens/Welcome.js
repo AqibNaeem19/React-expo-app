@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Navbar from '../components/Navbar';
 import { Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-// import Chatbot from '../components/Chatbot';
+import Chatbot from '../components/Chatbot';
 
 // Context for sharing authenticated user credentials. includes token
 import { CredentialsContext } from '../components/CredentialsContext';
@@ -22,9 +22,9 @@ const Welcome = ({ navigation}) => {
     <>
     <StatusBar style="auto" />
       <Navbar navigation={navigation} />
-      <Text>name: {name} </Text>
-      <Text>email: {email}</Text>
-      {/* <Chatbot /> */}
+      {/* <Text>name: {name} </Text>
+      <Text>email: {email}</Text> */}
+      <Chatbot />
     </>
   );
 };

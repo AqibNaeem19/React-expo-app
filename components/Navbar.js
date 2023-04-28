@@ -17,6 +17,7 @@ const { tertiary, brand } = Colors;
 const Navbar = ({ navigation }) => {
   // Context
   const { storedCredentials, setStoredCredentials } = useContext(CredentialsContext);
+  const { name, email } = storedCredentials;
 
   // Logsout the user
   const clearLogin = () => {
@@ -75,23 +76,21 @@ const Navbar = ({ navigation }) => {
             <View ref={modalRef} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'white' }}>
               <TouchableOpacity style={{ paddingVertical: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={() => console.log("Leave a review")}>
                 <View style={{ paddingVertical: 10, display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', width: 120, alignItems: 'center' }}>
-                  <Ionicons name="star-outline" size={24} color={tertiary} />
-                  <Text style={{ marginLeft: 10 }}>Leave a review</Text>
+                  <Ionicons name="person-outline" size={24} color={brand} />
+                  <Text style={{ marginLeft: 10 }}>{name}</Text>
                 </View>
+
               </TouchableOpacity>
-              <TouchableOpacity style={{ paddingVertical: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={() => console.log("Settings")}>
+              <TouchableOpacity style={{ paddingVertical: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={() => console.log("Leave a review")}>
                 <View style={{ paddingVertical: 10, display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', width: 120, alignItems: 'center' }}>
-
-                  <Ionicons name="settings-outline" size={24} color={tertiary} />
-                  <Text style={{ marginLeft: 10 }}>Settings</Text>
+                  <Ionicons name="mail-outline" size={24} color={brand} />
+                  <Text style={{ marginLeft: 10 }}>{email}</Text>
                 </View>
               </TouchableOpacity>
-
               <TouchableOpacity style={{ paddingVertical: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={clearLogin}>
                 <View style={{ paddingVertical: 10, display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', width: 120, alignItems: 'center' }}>
-
                   <Ionicons name="log-out-outline" size={24} color={brand} />
-                  <Text style={{ marginLeft: 10 }}>Logout</Text>
+                  <Text style={{ marginLeft: 10, fontSize: 16 }}>لاگ آوٹ</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -99,7 +98,7 @@ const Navbar = ({ navigation }) => {
         </TouchableWithoutFeedback>
       </Modal>
 
-      <NavbarText>MY APP</NavbarText>
+      <NavbarText>خوش آمدید</NavbarText>
       <NavbarButton onPress={() => navigation.navigate("Info")}>
         <Ionicons name="apps-sharp" size={24} color={tertiary} />
       </NavbarButton>

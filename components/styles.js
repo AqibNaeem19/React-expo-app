@@ -73,8 +73,8 @@ export const StyledTextInput = styled.TextInput`
 
 export const StyledInputLabel = styled.Text`
   color: ${tertiary};
-  font-size: 13px;
-  text-align: left;
+  font-size: 15px;
+  text-align: right;
 `;
 
 export const LeftIcon = styled.View`

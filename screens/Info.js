@@ -15,12 +15,12 @@ const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
 
 
 const myData = [
-  { message: "This is my first message" },
-  { message: "This is my second message" },
-  { message: "This is my third message" },
-  { message: "This is my fourth message" },
-  { message: "This is my fifth message" },
-  { message: "This is my sixth message" },
+  { message: "کسی بھی شہر کا موجودہ موسم جانیں" },
+  { message: "کسی بھی شہر کا زیادہ سے زیادہ درجہ حرارت جانیں" },
+  { message: "کسی بھی شہر کا کم از کم درجہ حرارت جانیں" },
+  { message: "7 دن تک موسم کی پیشن گوئی جانیں" },
+  { message: "زرعی مشینری کی قیمتیں جانیں" },
+  { message: "کھاد کی قیمتیں جانیں" },
 ]
 
 const Info = () => {

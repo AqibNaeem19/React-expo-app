@@ -43,7 +43,7 @@ const ForgotPassword = ({ navigation }) => {
   // Function to handle the user login
   const handleLogin = (credentials, setSubmitting) => {
     // Clears the previous message
-    let requestHandle = !receivedCode ? 'http://192.168.1.6:5000/user/reset-request' : 'http://192.168.1.6:5000/user/reset-password';
+    let requestHandle = !receivedCode ? 'http://192.168.1.7:5000/user/reset-request' : 'http://192.168.1.7:5000/user/reset-password';
     handleMessage(null);
     axios.post(requestHandle, credentials)
       .then((response) => {
@@ -51,6 +51,7 @@ const ForgotPassword = ({ navigation }) => {
         const { message, status } = result;
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
+          console.log('I am first if')
         }
         setSubmitting(false);
         if (status === 'SUCCESS' && !receivedCode) {
@@ -89,19 +90,19 @@ const ForgotPassword = ({ navigation }) => {
         <StatusBar style="auto" />
         <InnerContainer>
           <PageLogo passFor={true} resizeMode="cover" source={require('../assets/img/passwordForgot.png')} />
-          <PageTitle>Reset Password</PageTitle>
+          <PageTitle>پاس ورڈ ری سیٹ</PageTitle>
 
           <Formik
             initialValues={{ email: '', password: '', code: '' }}
             onSubmit={(values, { setSubmitting }) => {
               // Validating for empty fields
-              if ((!receivedCode && values.email == '') || (receivedCode && values.password == '' && values.code == '')) {
+              if ((!receivedCode && values.email == '') || (receivedCode && (values.password == '' || values.code == ''))) {
                 if (!receivedCode) {
                   handleMessage("Email is required");
                   setSubmitting(false);
                 } else {
-                  if (values.password == '' && values.code == '') {
-                    handleMessage("Fill al fields");
+                  if (values.code.length !== 5) {
+                    handleMessage("Code length should be 5 numbers");
                     setSubmitting(false);
                   } else if (values.code == '') {
                     handleMessage("Code is required");
@@ -118,7 +119,7 @@ const ForgotPassword = ({ navigation }) => {
           >
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (<StyledFormArea>
               <MyTextInput
-                label="Email Address"
+                label="ای میل اڈریس"
                 icon="mail"
                 placeholder="abc@gmail.com"
                 placeholderTextColor={darkLight}
@@ -130,7 +131,7 @@ const ForgotPassword = ({ navigation }) => {
               {receivedCode &&
                 <>
                   <MyTextInput
-                    label="Reset Code"
+                    label="کوڈ درج کریں"
                     icon="person"
                     placeholder="50794"
                     placeholderTextColor={darkLight}
@@ -139,7 +140,7 @@ const ForgotPassword = ({ navigation }) => {
                     value={values.code}
                   />
                   <MyTextInput
-                    label="Password"
+                    label="نیا پاس ورڈ"
                     icon="lock"
                     placeholder="* * *"
                     placeholderTextColor={darkLight}
@@ -157,7 +158,7 @@ const ForgotPassword = ({ navigation }) => {
 
               {!isSubmitting && 
                 <StyledButton onPress={handleSubmit}>
-                  <ButtonText>{!receivedCode ? 'Send me code': 'Update password'}</ButtonText>
+                  <ButtonText>{!receivedCode ? 'مجھے کوڈ بھیجیں': 'Update password'}</ButtonText>
                 </StyledButton>
               }
 

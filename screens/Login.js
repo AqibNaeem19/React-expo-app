@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
     const authLoginUrl = 'http://192.168.1.7:5000/user/login'
     console.log(credentials);
 
-    axios.post('http://192.168.1.7:5000/user/login', credentials)
+    axios.post('http://192.168.1.8:5000/user/login', credentials)
       .then((response) => {
         const result = response.data;
         const { message, status, user } = result;
@@ -61,7 +61,7 @@ const Login = ({ navigation }) => {
           handleMessage(message, status);
         } else {
           // navigation.navigate('Welcome', {...user});
-          persistLogin({...user}, message, status)
+          persistLogin({ ...user }, message, status)
         }
 
         setSubmitting(false);
@@ -71,7 +71,7 @@ const Login = ({ navigation }) => {
         if (error.response.data) {
           const { message, status } = error.response.data;
           handleMessage(message, status);
-        } else{
+        } else {
           handleMessage("Request failed, Check your network");
         }
         setSubmitting(false);
@@ -107,23 +107,27 @@ const Login = ({ navigation }) => {
         <StatusBar style="auto" />
         <InnerContainer>
           <PageLogo resizeMode="cover" source={require('../assets/img/img1.png')} />
-          <PageTitle>Kisaan Awaaz</PageTitle>
-          <SubTitle>Account Login</SubTitle>
+          <PageTitle>کسان آواز</PageTitle>
+          <SubTitle>اکاؤنٹ لاگ ان</SubTitle>
           <Formik
             initialValues={{ email: '', password: '' }}
             onSubmit={(values, { setSubmitting }) => {
               // Validating for empty fields
-              if (values.email == '' || values.password == '') {
-                handleMessage("All fields are required");
+              if (values.email == '') {
+                handleMessage("Email is required");
                 setSubmitting(false);
-              } else {
+              } else if (values.password == '') {
+                handleMessage("Password is required");
+                setSubmitting(false);
+              }
+              else {
                 handleLogin(values, setSubmitting);
               }
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (<StyledFormArea>
               <MyTextInput
-                label="Email Address"
+                label="ای میل اڈریس"
                 icon="mail"
                 placeholder="abc@gmail.com"
                 placeholderTextColor={darkLight}
@@ -133,7 +137,7 @@ const Login = ({ navigation }) => {
                 keyboardType="email-address"
               />
               <MyTextInput
-                label="Password"
+                label="پاس ورڈ"
                 icon="lock"
                 placeholder="* * *"
                 placeholderTextColor={darkLight}
@@ -148,17 +152,17 @@ const Login = ({ navigation }) => {
               <MsgBox type={messageType}>{message}</MsgBox>
 
               {!isSubmitting &&
-              <>
-                <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Login</ButtonText>
-                </StyledButton>
-                <ExtraView>
-                <ExtraText>Forgot Password? </ExtraText>
-                <TextLink onPress={() => navigation.navigate("ForgotPassword")}>
-                  <TextLinkContent>Reset</TextLinkContent>
-                </TextLink>
-              </ExtraView>
-              </>
+                <>
+                  <StyledButton onPress={handleSubmit}>
+                    <ButtonText>لاگ ان کریں</ButtonText>
+                  </StyledButton>
+                  <ExtraView>
+                    <TextLink onPress={() => navigation.navigate("ForgotPassword")}>
+                      <TextLinkContent>دوبارہ ترتیب دیں</TextLinkContent>
+                    </TextLink>
+                    <ExtraText>پاسورڈ بھول گے؟ </ExtraText>
+                  </ExtraView>
+                </>
               }
 
               {isSubmitting &&
@@ -169,8 +173,8 @@ const Login = ({ navigation }) => {
 
               <Line />
               <StyledButton google={true} onPress={() => navigation.navigate("Signup")}>
-                <Fontisto name="google" color={primary} size={25} />
-                <ButtonText google={true}>Create New Account</ButtonText>
+                <ButtonText>  نیا اکاؤنٹ بنائیں</ButtonText>
+                <Ionicons name="create-outline" color={primary} size={27} />
               </StyledButton>
             </StyledFormArea>)}
 

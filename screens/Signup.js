@@ -116,8 +116,8 @@ const Signup = ({ navigation }) => {
         <StatusBar style="auto" />
 
         <InnerContainer>
-          <PageTitle>Kisaan Awaaz</PageTitle>
-          <SubTitle>Account Signup</SubTitle>
+          <PageTitle>کسان آواز</PageTitle>
+          <SubTitle>نیا اکاؤنٹ بنائیں</SubTitle>
 
           {show && (
             <DateTimePicker
@@ -136,10 +136,21 @@ const Signup = ({ navigation }) => {
 
               values = { ...values, dateOfBirth: dob };
               // Validating for empty fields
-              if (values.email == '' || values.password == '' || values.name == '' || values.confirmPassword == '') {
-                handleMessage("All fields are required");
+              // if (values.email == '' || values.password == '' || values.name == '' || values.confirmPassword == '') {
+              //   handleMessage("All fields are required");
+              //   setSubmitting(false);
+              // } 
+              if (values.email == '') {
+                handleMessage("Email is required");
                 setSubmitting(false);
-              } else if (values.password !== values.confirmPassword) {
+              } else if (values.name == '') {
+                handleMessage("Name is required");
+                setSubmitting(false);
+              } else if (values.password == '') {
+                handleMessage("Password is required");
+                setSubmitting(false);
+              }
+              else if (values.password !== values.confirmPassword) {
                 handleMessage("Passwords do not match");
                 setSubmitting(false);
               } else {
@@ -150,7 +161,7 @@ const Signup = ({ navigation }) => {
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (<StyledFormArea>
 
               <MyTextInput
-                label="Full Name"
+                label="پورا نام"
                 icon="person"
                 placeholder="Aqib Naeem"
                 placeholderTextColor={darkLight}
@@ -160,7 +171,7 @@ const Signup = ({ navigation }) => {
               />
 
               <MyTextInput
-                label="Email Address"
+                label="ای میل اڈریس"
                 icon="mail"
                 placeholder="abc@gmail.com"
                 placeholderTextColor={darkLight}
@@ -171,7 +182,7 @@ const Signup = ({ navigation }) => {
               />
 
               <MyTextInput
-                label="Date of Birth"
+                label="پیدائش کی تاریخ"
                 icon="calendar"
                 placeholder="YYYY - MM - DD"
                 placeholderTextColor={darkLight}
@@ -184,7 +195,7 @@ const Signup = ({ navigation }) => {
               />
 
               <MyTextInput
-                label="Password"
+                label="پاس ورڈ"
                 icon="lock"
                 placeholder="* * *"
                 placeholderTextColor={darkLight}
@@ -198,7 +209,7 @@ const Signup = ({ navigation }) => {
               />
 
               <MyTextInput
-                label=" Confirm Password"
+                label="پاس ورڈ کی تصدیق کریں"
                 icon="lock"
                 placeholder="* * *"
                 placeholderTextColor={darkLight}
@@ -215,7 +226,7 @@ const Signup = ({ navigation }) => {
 
               {!isSubmitting &&
                 <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Signup</ButtonText>
+                  <ButtonText>اکاؤنٹ بنائیں</ButtonText>
                 </StyledButton>
               }
 
@@ -228,10 +239,10 @@ const Signup = ({ navigation }) => {
               <Line />
 
               <ExtraView>
-                <ExtraText>Already have an Account?  </ExtraText>
                 <TextLink onPress={() => navigation.navigate("Login")}>
-                  <TextLinkContent>Login</TextLinkContent>
+                  <TextLinkContent>  لاگ ان کریں</TextLinkContent>
                 </TextLink>
+                <ExtraText>پہلے سے ہی ایک اکاؤنٹ ہے</ExtraText>
               </ExtraView>
 
             </StyledFormArea>)}
